@@ -1,12 +1,14 @@
-"use client";
-import { signIn } from "next-auth/react";
+import Home from "./home/page";
 
-function Home() {
+ 
+ 
+
+function page() {
   return (
     <div>
-     
-      <button onClick={() =>signIn("google")}>Sign in with Google</button>
+      <Home/>
+       
     </div>
   );
 }
-export default Home;
+export default page;
