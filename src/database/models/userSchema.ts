@@ -1,21 +1,34 @@
-import mongoose from "mongoose";  
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
-const Schema = mongoose.Schema;  
+enum Role {
+  Student = "student",
+  Admin = "admin",
+}
 
-const userSchema = new Schema({
+interface IUser extends Document {
+  username: string;
+  profileImage: string;
+  email: string;
+  role: Role;
+}
+const userSchema = new Schema<IUser>({
   username: {
     type: String,
+    required: true,
   },
   email: {
     type: String,
+    required: true,
   },
-  googleId:{
-    type:String
+  role: {
+    type: String,
+    enum: [Role.Student,Role.Admin],
+    default: Role.Student,
   },
   profileImage: {
     type: String,
   },
 });
- const User=mongoose.model("User",userSchema)
- export default User
- 
+const User =mongoose.models.User || mongoose.model("User", userSchema);//cache ma xa vane use mongoose.models.User ,xaenavane  use mongoose.model("User", userSchema) 
+export default User;
