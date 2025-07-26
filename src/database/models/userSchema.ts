@@ -6,7 +6,7 @@ enum Role {
   Admin = "admin",
 }
 
-interface IUser extends Document {
+export interface IUser extends Document {
   username: string;
   profileImage: string;
   email: string;

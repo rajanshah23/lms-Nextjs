@@ -1,9 +1,10 @@
 import connectDB from "@/database/connection";
 import User from "@/database/models/userSchema";
-import NextAuth from "next-auth";
+import NextAuth ,{Session} from "next-auth";
+import {  } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -24,6 +25,7 @@ const handler = NextAuth({
             email: user.email,
             profileImage: user.image,
           });
+
         }
         return true;
       } catch (error) {
@@ -31,6 +33,12 @@ const handler = NextAuth({
         return false;
       }
     },
-  },
-});
+    async session({ session,user}:{session:Session,user:any}){
+    const data = await User.findById(user.id)
+    session.user.role = data?.role || "student"
+    return session
+  }
+  }
+}
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

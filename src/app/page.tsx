@@ -1,12 +1,8 @@
-import Home from "./home/page";
-
- 
- 
 
 function page() {
   return (
     <div>
-      <Home/>
+       <h1>contact</h1>
        
     </div>
   );
