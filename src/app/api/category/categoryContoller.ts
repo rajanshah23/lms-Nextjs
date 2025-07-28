@@ -1,11 +1,11 @@
 import connectDB from "@/database/connection"
 import Category from "@/database/models/categorySchema"
-import { authMiddleware } from "../../../../middleware/authMiddleware"
-import { NextRequest } from "next/server"
+// import { authMiddleware } from "../../../../middleware/authMiddleware"
+// import { NextRequest } from "next/server"
 
 export async function createCategory(req: Request) {
     try {
-        const response=authMiddleware(req as NextRequest)
+    
         await connectDB()
         const { name, description } = await req.json()  //data haru req.json ma aauxan
         const existingCategory = await Category.findOne({ name: name })
@@ -32,6 +32,7 @@ export async function createCategory(req: Request) {
 
 export async function getCategory() {
     try {
+             // const response=authMiddleware(req as NextRequest)
          await connectDB()
     const categories = await Category.find()  // find() ley array return garxa
     if (categories.length === 0) {
@@ -54,7 +55,4 @@ export async function getCategory() {
     }
 }
 
-export async function deleteCategory(req:Request){
-    await connectDB()
  
-}

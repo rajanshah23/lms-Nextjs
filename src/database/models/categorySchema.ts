@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 const Schema=mongoose.Schema
 
-interface ICategory extends Document{
+ export interface ICategory extends Document{
+    _id:string,
     name:string,
     description:string,
     createdAt:Date

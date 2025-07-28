@@ -9,7 +9,7 @@ function Sidebar(){
           <img
             src="https://imgs.search.brave.com/E-tvLX0IQTw6kAKk0HN8HJpytsHefC9qyW6uk_vqCt0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9sbXMt/bGV0dGVyLWxvZ28t/ZGVzaWduLWJsYWNr/LWJhY2tncm91bmQt/bG1zLWNyZWF0aXZl/LWluaXRpYWxzLWxl/dHRlci1sb2dvLWNv/bmNlcHQtbG1zLWxl/dHRlci1kZXNpZ24t/bG1zLWxldHRlci1s/b2dvLWRlc2lnbi0y/NDMyNzA5NTYuanBn "
             alt="Logo"
-            className="h-10 w-auto"
+            className="h-10 w-auto mask-radial-from-fuchsia-400"
           />
        <span className="text-3xl  font-bold  ">LMS Project</span>   
         </div>
