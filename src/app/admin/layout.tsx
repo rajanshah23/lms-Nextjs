@@ -1,7 +1,7 @@
 import DashBoard from "@/components/dashboard/Dashboard";
- 
+import StoreProvider from "../StoreProvider";
 
 function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <DashBoard>{children}</DashBoard>;
+  return <StoreProvider><DashBoard> {children}</DashBoard></StoreProvider>;
 }
 export default AdminLayout;

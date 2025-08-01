@@ -1,50 +1,28 @@
 "use client";
 import Modal from "@/components/modal/Modal";
-import  { ICategory } from "@/database/models/categorySchema";
- import { useEffect, useState } from "react";
+   
+import { fetchCategories } from "@/store/category/categorySlice";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { useEffect, useState } from "react";
 
-async function fetchCategory() {
-  try {
-    const response: Response = await fetch(
-      "http://localhost:3000/api/category"
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch response");
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching category:", error);
-  }
-}
 function AdminLayout() {
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [categories,setCategories]=useState([])
- 
+  const dispatch = useAppDispatch();
+  const{categories}=useAppSelector((store)=>store.category)
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  console.log(isModalOpen);
+  // console.log(isModalOpen);
 
-
-  useEffect(()=>{
-     const getCategories=async()=>{
-      const data=await fetchCategory()
-    setCategories(data.data)
-     }
-     getCategories()
-  },[])
-
-
-
-
-  
-return (
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
+  return (
     <>
-       <div className="flex flex-col">
+      <div className="flex flex-col">
         <div className=" overflow-x-auto">
-    {isModalOpen && <Modal closeModal={closeModal} />}
+          {isModalOpen && <Modal closeModal={closeModal} />}
           <div className="min-w-full inline-block align-middle">
             <div className="relative  text-gray-500 focus-within:text-gray-900 mb-4">
               <div className="absolute inset-y-0 left-1 flex items-center pl-3 pointer-events-none ">
@@ -78,7 +56,6 @@ return (
               </div>
               <div className="flex justify-between">
                 <input
-              
                   type="text"
                   id="default-search"
                   className="block w-80 h-11 pr-5 pl-12 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none"
@@ -135,7 +112,7 @@ return (
                 </thead>
                 <tbody className="divide-y divide-gray-300 ">
                   {categories.length > 0 &&
-                    categories.map((category:ICategory) => {
+                    categories.map((category) => {
                       return (
                         <tr
                           key={category._id}
@@ -146,7 +123,8 @@ return (
                           </td>
                           <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
                             {" "}
-                            {category.name}{""}
+                            {category.name}
+                            {""}
                           </td>
                           <td className="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
                             {" "}
@@ -160,10 +138,7 @@ return (
                           </td>
                           <td className=" p-5 ">
                             <div className="flex items-center gap-1">
-                              <button
-                               
-                                className="p-2  rounded-full  group transition-all duration-500  flex item-center"
-                              >
+                              <button className="p-2  rounded-full  group transition-all duration-500  flex item-center">
                                 <svg
                                   className="cursor-pointer"
                                   width={20}
@@ -179,10 +154,7 @@ return (
                                   />
                                 </svg>
                               </button>
-                              <button
-                               
-                                className="p-2 rounded-full  group transition-all duration-500  flex item-center"
-                              >
+                              <button className="p-2 rounded-full  group transition-all duration-500  flex item-center">
                                 <svg
                                   width={20}
                                   height={20}
