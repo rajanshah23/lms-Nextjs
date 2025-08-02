@@ -1,36 +1,30 @@
 "use client";
-
-import { ChangeEvent, useState } from "react";
+import { addCategories, resetstatus } from "@/store/category/categorySlice";
+import { Status } from "@/store/category/types";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { ChangeEvent, useEffect, useState } from "react";
 
 function Modal({ closeModal }: { closeModal: () => void }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const { status } = useAppSelector((store) => store.category);
 
   const handlesubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const response = await fetch("http://localhost:3000/api/category", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ name: name, description: description }),
-      });
-      if (response.ok) {
-        alert("Category created successfully");
-        closeModal();
-        window.location.reload();
-      } else {
-        alert("Something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    dispatch(addCategories({ name, description }));
   };
+
+  useEffect(() => {
+     if(status === Status.Success) {
+    setLoading(false);
+    closeModal();
+    dispatch(resetstatus());
+    }
+  }, [status]);
+
   return (
     <div
       id="modal"

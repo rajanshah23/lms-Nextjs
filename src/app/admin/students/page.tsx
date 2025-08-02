@@ -146,7 +146,7 @@ function Students(){
                     Retail
                   </td>
                   <td className="p-5">
-                    <div className="flex items-center gap-1">
+                     <div className="flex items-center gap-1">
                       <button className="p-2 rounded-full group transition-all duration-500 flex items-center hover:bg-indigo-50">
                         <Edit className="w-5 h-5 text-indigo-500 cursor-pointer" />
                       </button>
