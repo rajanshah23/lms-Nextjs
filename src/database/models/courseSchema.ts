@@ -4,7 +4,7 @@ const Schema=mongoose.Schema
 interface ICourse extends Document{
     title:string,
     description:string,
-    Price:number,
+    price:number,
     duration:string,
     category:mongoose.Types.ObjectId,
     lessons:mongoose.Types.ObjectId[],
@@ -21,7 +21,7 @@ const courseSchema=new Schema<ICourse>({
         type:String,
         required:true       
     },
-    Price:{
+    price:{
         type:Number,
         required:true
     },
@@ -32,10 +32,10 @@ const courseSchema=new Schema<ICourse>({
         type:Schema.Types.ObjectId,
         ref:"Category"
     },
-    lessons:[{
-        type:Schema.Types.ObjectId,
-        ref:"Lessons"
-    }],
+    // lessons:[{
+    //     type:Schema.Types.ObjectId,
+    //     ref:"Lessons"
+    // }],
     createdAt:{
          type:Date,
          default:Date.now()

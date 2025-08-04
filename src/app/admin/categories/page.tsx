@@ -10,7 +10,6 @@ function AdminLayout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   const{categories}=useAppSelector((store)=>store.category)
-
   const openModal = useCallback(() => setIsModalOpen(true),[]);
   const closeModal = useCallback(() => setIsModalOpen(false),[]);
 
